@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="../assets/css/ol.css" />
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" />
+    <style type="text/css">
+      body { overflow: hidden; }
+
+      .navbar-offset { margin-top: 50px; }
+      #map { position: absolute; top: 50px; bottom: 0px; left: 0px; right: 0px; }
+      #map .ol-zoom { font-size: 1.2em; }
+
+      .zoom-top-opened-sidebar { margin-top: 5px; }
+      .zoom-top-collapsed { margin-top: 45px; }
+
+      .mini-submenu{
+        display:none;
+        background-color: rgba(255, 255, 255, 0.46);
+        border: 1px solid rgba(0, 0, 0, 0.9);
+        border-radius: 4px;
+        padding: 9px;
+        /*position: relative;*/
+        width: 42px;
+        text-align: center;
+      }
+
+      .mini-submenu-left {
+        position: absolute;
+        top: 60px;
+
+        left: .5em;
+        z-index: 40;
+      }
+
+
+      .sidebar { z-index: 45; }
+
+      .main-row { position: relative; top: 0; }
+
+      .mini-submenu:hover{
+        cursor: pointer;
+      }
+
+      .slide-submenu{
+        background: rgba(0, 0, 0, 0.45);
+        display: inline-block;
+        padding: 0 8px;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+
+    .container-hp-bt {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 2em;
+    }
+
+    .button-hp {
+        border-radius: 10px;
+        background-color: #73a1d6;
+        border: none;
+        color: white;
+        padding: 16px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 0 1em;
+        cursor: pointer;
+    }
+    .button-emergency-hp {
+        border-radius: 10px;
+        background-color: #ff6a6a;
+        border: none;
+        color: white;
+        padding: 30px 15px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 0 1em;
+        cursor: pointer;
+    }
+    .button-emergency-hp:hover {
+        background-color: rgb(255, 0, 0);
+    }
+
+    .button-hp:hover {
+        background-color: rgb(0, 81, 255);
+    }
+
+    </style>
+    <script type="text/javascript" src="../assets/js/ol.js"></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+
+      function applyMargins() {
+        var leftToggler = $(".mini-submenu-left");
+        if (leftToggler.is(":visible")) {
+          $("#map .ol-zoom")
+            .css("margin-left", 0)
+            .removeClass("zoom-top-opened-sidebar")
+            .addClass("zoom-top-collapsed");
+        } else {
+          $("#map .ol-zoom")
+            .css("margin-left", $(".sidebar-left").width())
+            .removeClass("zoom-top-opened-sidebar")
+            .removeClass("zoom-top-collapsed");
+        }
+      }
+
+      function isConstrained() {
+        return $(".sidebar").width() == $(window).width();
+      }
+
+      function applyInitialUIState() {
+        if (isConstrained()) {
+          $(".sidebar-left .sidebar-body").fadeOut('slide');
+          $('.mini-submenu-left').fadeIn();
+        }
+      }
+
+      $(function(){
+        $('.sidebar-left .slide-submenu').on('click',function() {
+          var thisEl = $(this);
+          thisEl.closest('.sidebar-body').fadeOut('slide',function(){
+            $('.mini-submenu-left').fadeIn();
+            applyMargins();
+          });
+        });
+
+        $('.mini-submenu-left').on('click',function() {
+          var thisEl = $(this);
+          $('.sidebar-left .sidebar-body').toggle('slide');
+          thisEl.hide();
+          applyMargins();
+        });
+
+        $(window).on("resize", applyMargins);
+
+        var map = new ol.Map({
+          target: "map",
+          layers: [
+            new ol.layer.Tile({
+              source: new ol.source.OSM()
+            })
+          ],
+          view: new ol.View({
+            center: [0, 0],
+            zoom: 2
+          })
+        });
+        applyInitialUIState();
+        applyMargins();
+
+
+      });
+    </script>
+    <title>Homepage</title>
+  </head>
+  <body>
+
+    <div class="container">
+      <nav class="navbar navbar-fixed-top navbar-default" role="navigation">
+        <div class="container-fluid">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="homepage.html">Home Page</a>
+          </div>
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="#">Help</a></li>
+              <li class="active"><a href="#">Contact Us</a></li>
+              <li class="dropdown pull-right">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Languages <b class="caret"></b></a>
+                <ul class="dropdown-menu pull-right">
+                  <li><a href="homepage.html" class="nav-a-right-LanguageButton">English (en)</a></li>
+                  <li><a href="homepage-tr.html" class="nav-a-right-LanguageButton">Turkish (tr)</a></li>
+                </ul>
+              </li>
+              <li class="active"><a href="logout-page">Logout</a></li>
+            </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+      </nav>
+    </div>
+      <div class="navbar-offset"></div>
+      <div id="map">
+      </div>
+      <div class="row main-row">
+        <div class="col-sm-4 col-md-3 sidebar sidebar-left pull-left">
+          <div class="panel-group sidebar-body" id="accordion-left">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" href="#layers">
+                    <i class="fa fa-list-alt"></i>
+                    Reports
+                  </a>
+                  <span class="pull-right slide-submenu">
+                    <i class="fa fa-chevron-left"></i>
+                  </span>
+                </h4>
+              </div>
+              <div id="layers" class="panel-collapse collapse in">
+                <div class="panel-body list-group">
+                  <a href="#" class="list-group-item" id="traffic-report">
+                    <i class="fa fa-globe"></i> Show Traffic Report
+                  </a>
+                  <script src="traffic-report.js"></script>
+                  <a href="#" class="list-group-item" id="crime-report">
+                    <i class="fa fa-globe"></i> Show Crime Report
+                  </a>
+                  <script src="crime.js"></script>
+                  <a href="#" class="list-group-item" id="all-report">
+                    <i class="fa fa-globe"></i> Show All Report
+                  </a>
+                  <script src="all-report.js"></script>
+                </div>
+              </div>
+            </div>
+            <div class="panel panel-default">
+            </div>
+            </div>
+          </div>
+        </div>
+      <div class="mini-submenu mini-submenu-left pull-left">
+        <i class="fa fa-list-alt"></i>
+      </div>
+
+      <div style="position: absolute; top: -50px; left: 0; width: 100%; text-align: center;">
+        <iframe id="map1" src="heatmap_crime.html" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; border: none; margin-top: 60px;"></iframe>
+      </div>
+
+      <div style="position: absolute; top: -50px; left: 0; width: 100%; text-align: center;">
+        <iframe id="map2" src="heatmap_crime.html" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; border: none; margin-top: 60px;"></iframe>
+      </div>
+
+        <div style="position: absolute; top: -50px; left: 0; width: 100%; text-align: center;">
+
+        <iframe id="map3" src="heatmap_crime.html" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; border: none; margin-top: 60px;"></iframe>
+      </div>
+
+      <div id ="buttonsmap" class="container-hp-bt" style="position: fixed; top: 85%; left: 20%; bottom: 50">
+        <button class="button-hp">Notifications</button>
+        <button class="button-hp" onclick="window.location.href='new-report'">Create Report</button>
+        <button class="button-emergency-hp">EMERGENCY CALL</button>
+        <button class="button-hp" onclick="window.location.href='create-route'">Safe Drive</button>
+        <button class="button-hp" onclick="window.location.href='create-route'">Safe Walk</button>
+      </div>
+  </body>

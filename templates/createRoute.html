@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Navigation App</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="styles-index.css">
+  </head>
+  <body>
+    <div id="app">
+      <h1>Navigation App</h1>
+      <input id="origin" type="text" placeholder="Enter origin">
+      <input id="destination" type="text" placeholder="Enter destination">
+      <button id="get-directions">Get Directions</button>
+      <div id="map"></div>
+    </div>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCOap-TU0ld8l-5splNWaic_awH2DTWoSs&callback=initMap" async defer></script>
+    <script src="app.js"></script>
+  </body>
+</html>
+

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Create Report Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: rgb(209, 216, 221);
+        }
+
+        form {
+            background-color: rgb(158, 185, 212);
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 600px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        input[type="submit"] {
+            background-color: rgb(236, 239, 241);
+            color: rgb(12, 12, 11);
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        select,
+        input[type="file"],
+        textarea {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>
+        <center>
+            Creating A New Report
+        </center>
+    </h1>
+
+    <form action="/create-report" method="post" enctype="multipart/form-data">
+
+
+        <label for="reportType">Select report type:</label>
+
+        <select id="reportType" name="reportType" onchange="toggleFileUpload()">
+            <option value="audio">Audio Report</option>
+            <option value="text">Text Report</option>
+            <option value="photo">Photo Report</option>
+            <option value="video">Video Report</option>
+        </select>
+
+        <br><br>
+
+        <div id="fileUploadSection">
+            <label for="fileToUpload">Select file to upload:</label>
+            <input type="file" name="fileToUpload" id="fileToUpload">
+            <br><br>
+        </div>
+
+        <div id="textReportSection" style="display:none">
+            <label for="textReport">Type your text report here:</label>
+            <textarea id="textReport" name="textReport" rows="10" cols="50"></textarea>
+            <br><br>
+        </div>
+
+        <input type="submit" value="Submit Report" name="submit" id="submitBtn">
+    </form>
+
+    <script>
+        function toggleFileUpload()
+        {
+            var reportType = document.getElementById("reportType").value;
+            var fileUploadSection = document.getElementById("fileUploadSection");
+            var textReportSection = document.getElementById("textReportSection");
+            var submitBtn = document.getElementById("submitBtn");
+
+            if (reportType == "text")
+            {
+                fileUploadSection.style.display = "none";
+                textReportSection.style.display = "block";
+                submitBtn.value = "Submit Text Report";
+            }
+            else
+            {
+                fileUploadSection.style.display = "block";
+                textReportSection.style.display = "none";
+                submitBtn.value = "Submit Report";
+            }
+        }
+
+
+        function getLocation()
+        {
+            if (navigator.geolocation)
+            {
+                navigator.geolocation.getCurrentPosition(sendCoordinates);
+            }
+            else
+            {
+                console.log("Geolocation is not supported by this browser.");
+            }
+        }
+
+
+        function sendCoordinates(position)
+        {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", "/location", true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.send(JSON.stringify({ "latitude": latitude, "longitude": longitude }));
+        }
+
+        //Call getLocation function when the page loads
+        window.addEventListener("load", getLocation);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,276 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap');
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'poppins' ,sans-serif;
+}
+header{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    padding:20px 100px;
+    background: transparent;
+    color: #fff;
+    display:flex;
+    justify-content: space-between;
+    align-items: right;
+    z-index: 99;
+}
+.title{
+    color: #fff;
+    font-size: 2em;
+    text-decoration: none;
+    font-weight: 500;
+    margin-left: 10px;
+}
+
+body{
+    background-image: url("Istanbul.png");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    
+}
+
+
+.navigation a{
+    position: relative;
+    font-size: 1.1em;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    margin-left: 40px;
+}
+.navigation a::after{
+    content:'';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 100%;
+    height: 3px;
+    background: #fff;
+    color: #fff;
+    border-radius: 5px;
+    transform-origin: right;
+    transform: scaleX(0);
+    transition: transform .5s;
+}
+
+.navigation a:hover::after{
+    transform-origin: left;
+    transform: scaleX(1);
+}
+.navigation .Loginpopup{
+    width: 130px;
+    height: 50px;
+    background: transparent;
+    border: 2px solid #fff;
+    outline: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.1em;
+    color: #fff;
+    font-weight: 500;
+    margin-left: 40px;
+}
+
+
+.navigation .nav-li{
+    list-style-type: none;
+    padding:0;
+    margin: 0;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    font-size: small;
+    justify-content: left;
+    margin-top: 20px;
+    font-weight: 500;
+    margin-left: 450px;
+    line-height: 0px;
+
+
+}
+
+
+
+
+.box{
+    position:relative;
+    display: flex;
+    justify-content: center;
+    background: transparent;
+    align-items: center;
+    border: none;
+    overflow: hidden;
+    transition: height .2s ease;
+    transform: scale(0);
+
+
+}
+
+.box.active{
+    height: 700px;
+}
+.box.active-popup{
+    transform: scale(1); 
+ }
+
+
+
+.box .container{
+    transition: transform .18s ease;
+    transform: translateX(0);
+}
+
+.box.active .container{
+    transition: none;
+    transform: scale(0);
+
+}
+
+.box .registration-container{
+    position: absolute;
+    transition: none;
+    transform: scale(0);
+}
+.box.active .registration-container{
+    transition: transform .18s ease;
+    transform: translateX(-250px);
+
+}
+
+
+
+.container{
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 15px 0 15px;
+}
+
+.top{
+    color: #fff;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    padding: 10px 0 10px 0;
+    margin-top: 100%;
+
+}
+.input-field .input{
+    height: 45px;
+    width: 87%;
+    border: none;
+    border-radius: 30px;
+    color: #fff;
+    font-size: 15px;
+    padding: 0 0 0 45px;
+    background: rgba(255,255,255,0.1);
+    outline: none;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+}
+i{
+    position: relative;
+    top: -33px;
+    left: 17px;
+    color: #fff;
+}
+::-webkit-input-placeholder{
+    color: #fff;
+}
+.submit{
+    border: none;
+    border-radius: 30px;
+    font-size: 15px;
+    height: 45px;
+    outline: none;
+    width: 100%;
+    color: black;
+    background: rgba(255,255,255,0.7);
+    cursor: pointer;
+    transition: .5s ;
+    margin-top: 20px;
+}
+.submit:hover{
+    box-shadow: 1px 5px 7px 1px rgba(0, 0, 0, 0.2);
+}
+.two-col{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: #fff;
+    font-size: small;
+    margin-top: 10px;
+}
+.one{
+    display: flex;
+}
+label a{
+    text-decoration: none;
+    color: #fff;
+}
+.register{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: #fff;
+    font-size: small;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.register p a:hover{
+    color: #fff;
+    text-decoration: underline;
+}
+
+
+
+
+.registration-container{
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #fff;
+    margin-left: 40%;
+    margin-top: 0;
+
+}
+
+
+.registration-top{
+    color: #fff;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    padding: 20px 0 20px 0;
+    margin-top: 50%;
+
+}
+
+
+.loginlink{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: #fff;
+    font-size: small;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.loginlink p a:hover{
+    color: #fff;
+    text-decoration: underline;
+}
